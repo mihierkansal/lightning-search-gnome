@@ -14,7 +14,6 @@
 
 .lightning-search-box {
   padding: 0;
-  margin-top: 50px;
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
@@ -44,10 +43,36 @@
   background-color: transparent;
 }
 
+/* No padding here: the overlay scrollbar is drawn at the scroll view's edge.
+ * The inner results keep the content padding, which leaves the native
+ * (draggable) scrollbar its own gutter. */
+.lightning-results-scroll {
+  border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+}
+
+/* The shell theme always paints the scrollbar and makes it a 2px line inset
+ * 3px from the edge, by insetting the handle with a 3px transparent border
+ * (St clips a handle's background to its padding box). Overriding the width,
+ * border and radius gives a single thin bar flush with the scroll view's
+ * right edge; LauncherView fades it in on hover, since St cannot. */
+StScrollView.lightning-results-scroll StScrollBar {
+  min-width: 6px;
+  min-height: 6px;
+}
+
+StScrollView.lightning-results-scroll StScrollBar StBin#trough {
+  background-color: transparent;
+}
+
+StScrollView.lightning-results-scroll StScrollBar .vhandle,
+StScrollView.lightning-results-scroll StScrollBar .hhandle {
+  border: none;
+  border-radius: 3px;
+}
+
 .lightning-results {
   padding: 6px;
   spacing: 2px;
-  border-top: 0.5px solid rgba(255, 255, 255, 0.1);
 }
 
 .lightning-result-row {

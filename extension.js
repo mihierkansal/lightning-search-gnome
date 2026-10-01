@@ -14,6 +14,7 @@ import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";
 import * as Main from "resource:///org/gnome/shell/ui/main.js";
 
 import { FALLBACK_SHORTCUT, preferredShortcut } from "./lib/keybindings.js";
+import { clearCommandCache, makeCommandItem } from "./lib/commands.js";
 import { KeyboardShortcuts } from "./lib/keyboard-shortcuts.js";
 import { LauncherView } from "./lib/launcher-view.js";
 import { getPanelButton } from "./lib/panel-button.js";
@@ -64,6 +65,7 @@ export default class LightningSearchExtension extends Extension {
   enable() {
     this._gettext = this.gettext.bind(this);
     this._settings = this.getSettings(SCHEMA_ID);
+    clearCommandCache();
     this._syncFuzzyLevel();
 
     this._view = new LauncherView(this._placeholderText());
@@ -72,7 +74,7 @@ export default class LightningSearchExtension extends Extension {
     this._syncEntryIcon();
     this._view.handlers = {
       onQueryChanged: () => this._onQueryChanged(),
-      onActivationRequested: () => this._activateSelected(),
+      onActivationRequested: (mode) => this._activateSelected(mode),
       onSelectionMoved: (step) => this._moveSelection(step),
       onDismissRequested: () => this._hideLauncher(),
     };
@@ -113,6 +115,11 @@ export default class LightningSearchExtension extends Extension {
     this._fuzzyLevelChangedId = this._settings.connect(
       "changed::fuzzy-level",
       () => this._syncFuzzyLevel(),
+    );
+
+    this._commandRunnerChangedId = this._settings.connect(
+      "changed::enable-command-runner",
+      () => this._syncCommandRunner(),
     );
 
     this._panelButton = null;
@@ -162,6 +169,10 @@ export default class LightningSearchExtension extends Extension {
     if (this._fuzzyLevelChangedId) {
       this._settings.disconnect(this._fuzzyLevelChangedId);
       this._fuzzyLevelChangedId = 0;
+    }
+    if (this._commandRunnerChangedId) {
+      this._settings.disconnect(this._commandRunnerChangedId);
+      this._commandRunnerChangedId = 0;
     }
     if (this._panelIconChangedId) {
       this._settings.disconnect(this._panelIconChangedId);
@@ -236,6 +247,10 @@ export default class LightningSearchExtension extends Extension {
 
   _syncFuzzyLevel() {
     setFuzzyLevel(this._settings.get_string("fuzzy-level"));
+    if (this._view?.isVisible) this._scheduleSearch();
+  }
+
+  _syncCommandRunner() {
     if (this._view?.isVisible) this._scheduleSearch();
   }
 
@@ -392,9 +407,12 @@ export default class LightningSearchExtension extends Extension {
       _,
     );
     const calculator = [makeCalcItem(query, _)].filter(Boolean);
+    const commands = this._settings.get_boolean("enable-command-runner")
+      ? [makeCommandItem(query, _)].filter(Boolean)
+      : [];
     const url = [makeUrlItem(query, _)].filter(Boolean);
     const web = url.length ? [] : [makeWebItem(query, this._engineName(), _)];
-    return { apps, calculator, url, web, files: [] };
+    return { apps, calculator, commands, url, web, files: [] };
   }
 
   _engineName() {
@@ -466,7 +484,7 @@ export default class LightningSearchExtension extends Extension {
     this._view.setSelection(this._selectedIndex);
   }
 
-  _activateSelected() {
+  _activateSelected(mode = "background") {
     if (!this._view?.isVisible) return;
 
     const item = this._items[this._selectedIndex];
@@ -474,6 +492,7 @@ export default class LightningSearchExtension extends Extension {
 
     try {
       activateItem(item, {
+        mode,
         settings: this._settings,
         setEntryText: (text) => {
           this._view.entryText = text;

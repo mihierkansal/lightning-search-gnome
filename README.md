@@ -32,6 +32,7 @@ What you can search:
 **Calculator**: Type a math expression, like 4 + 3 \* 8 (it follows order of operations)
 **URL**: Type a URL/website, like https://example.com, example.com, localhost:3000, 192.168.1.1; Only some domains are recognized if you don't type https://, since the .something kind of naming is used for both files and websites - like .zip, .com, etc.
 **Web**: Shown when not very many other things (apps, files, calculator, etc) match what you typed. Defaults to Google, but you can change it.
+**Commands**: When the first word you type is a program installed on your PATH (for example `htop`, `git status`, `ls -la`), a "Run in background" result appears and runs the line in the background; press Shift + Enter to run it in your default terminal window instead.
 
 ## Controlling from the terminal
 
@@ -62,17 +63,19 @@ Open the extension's preferences to customize it:
 
 - **Shortcut**: the global keybinding that opens the launcher.
 - **Panel**: show or hide the search icon on the right of the top bar.
-- **Launcher**: the placeholder text shown in the search box while it is empty, plus
-  whether the search icon is shown and how large its magnifying glass is drawn.
+- **Launcher**: the placeholder text shown in the search box while it is empty,
+  whether the search icon is shown and how large its magnifying glass is drawn, and
+  whether typing a program name offers to run it in your terminal.
 - **Appearance**: the background color of the highlighted result row.
 - **Search**: the search engine used for the “Search web” fallback result.
 
 ## Screenshots
 
-<img src="Screenshot/main-box.png" alt="Launcher view" width="600" style="border-radius:6px;display:block;margin:6px;">
-<img src="Screenshot/app-search.png" alt="Application search" width="600" style="border-radius:6px;display:block;margin:6px;">
-<img src="Screenshot/file-search.png" alt="Files search" width="600" style="border-radius:6px;display:block;margin:6px;"> 
-<img src="Screenshot/calculator.png" alt="Calculator" width="600" style="border-radius:6px;display:block;margin:6px;">
+<img src="screenshots/applications-search.png" alt="Application search" width="600" style="border-radius:6px;display:block;margin:6px;">
+<img src="screenshots/file-search.png" alt="Files search" width="600" style="border-radius:6px;display:block;margin:6px;"> 
+<img src="screenshots/calculator.png" alt="Calculator" width="600" style="border-radius:6px;display:block;margin:6px;">
+
+Note: For you, it may not look exactly like this for you - it depends on your GNOME Shell theme and other extensions. For example here I have Blur My Shell and a Mac-like GTK theme. If you don't have that, it will just look like a normal GNOME Shell element.
 
 ## The reason it exists, despite alternatives
 

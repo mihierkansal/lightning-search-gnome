@@ -112,6 +112,18 @@ export default class Preferences extends ExtensionPreferences {
     });
     launcherGroup.add(entryIconSizeRow);
 
+    const commandRunnerRow = new Adw.SwitchRow({
+      title: _("Run terminal commands"),
+      subtitle: _(
+        "When the first word matches an executable on your PATH, run the line in the background (Shift + Enter for a terminal window)",
+      ),
+    });
+    commandRunnerRow.active = settings.get_boolean("enable-command-runner");
+    commandRunnerRow.connect("notify::active", () => {
+      settings.set_boolean("enable-command-runner", commandRunnerRow.active);
+    });
+    launcherGroup.add(commandRunnerRow);
+
     const matchingGroup = new Adw.PreferencesGroup({
       title: _("Matching"),
       description: _("How loosely a typed query matches application names."),

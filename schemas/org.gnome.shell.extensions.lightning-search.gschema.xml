@@ -88,5 +88,14 @@
         "~/Documents/Clients/John-Doe/IRS-Form-8879.pdf" WILL come up.</description>
     </key>
 
+    <!-- Run a typed command line in the user's terminal -->
+    <key type="b" name="enable-command-runner">
+      <default>true</default>
+      <summary>Run terminal commands</summary>
+      <description>When the first word of the query is an executable on your PATH, offer to run
+        the whole line when the result is activated. Pressing Enter runs it in the background
+        without a terminal. Shift + Enter runs it in a terminal window. </description>
+    </key>
+
   </schema>
 </schemalist>
