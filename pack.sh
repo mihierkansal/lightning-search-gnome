@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Lightning Search, packaging for extensions.gnome.org
+# Lightning Search Launcher, packaging for extensions.gnome.org
 #
 # Copyright (C) 2026 Avimanyu Rimal, Mihier Kansal
 #

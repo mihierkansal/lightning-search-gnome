@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "private": true,
   "type": "module",
-  "description": "Lightning Search, a fast search launcher for GNOME Shell, inspired by Spotlight",
+  "description": "Lightning Search Launcher, a fast search launcher for GNOME Shell, inspired by Spotlight",
   "scripts": {
     "check": "for f in extension.js prefs.js shortcuts.js lib/*.js lib/search/*.js; do node --check \"$f\" || exit 1; done",
     "pack": "./pack.sh"

@@ -1,5 +1,5 @@
 /*
- * Lightning Search
+ * Lightning Search Launcher
  *
  * Copyright (C) 2026 Avimanyu Rimal
  *
@@ -165,7 +165,9 @@ export default class Preferences extends ExtensionPreferences {
 
     const selectionTextColorRow = new Adw.ActionRow({
       title: _("Selected result text color"),
-      subtitle: _("Title and subtitle text color of the highlighted result row"),
+      subtitle: _(
+        "Title and subtitle text color of the highlighted result row",
+      ),
     });
     const textColorButton = new Gtk.ColorDialogButton({
       dialog: new Gtk.ColorDialog({ with_alpha: true }),

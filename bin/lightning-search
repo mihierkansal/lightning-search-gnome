@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Lightning Search, terminal control command
+# Lightning Search Launcher, terminal control command
 #
 # Copyright (C) 2026 Avimanyu Rimal, Mihier Kansal
 #
@@ -30,9 +30,7 @@ Examples:
 EOF
 }
 
-command=${1:-toggle}
-# Guard the shift: dash prints "can't shift that many" to stderr when
-# there are no positional parameters, and `|| true` cannot suppress that.
+command=${1:-toggle} 
 if [ "$#" -gt 0 ]; then
   shift
 fi
@@ -67,6 +65,6 @@ else
     --method "$BUS_NAME.$method" >/dev/null
 fi || {
   echo "lightning-search: could not reach $BUS_NAME." >&2
-  echo "Is the Lightning Search extension enabled for this session?" >&2
+  echo "Is the Lightning Search Launcher extension enabled for this session?" >&2
   exit 1
 }

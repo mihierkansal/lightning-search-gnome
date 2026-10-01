@@ -43,9 +43,6 @@
   background-color: transparent;
 }
 
-/* No padding here: the overlay scrollbar is drawn at the scroll view's edge.
- * The inner results keep the content padding, which leaves the native
- * (draggable) scrollbar its own gutter. */
 .lightning-results-scroll {
   border-top: 0.5px solid rgba(255, 255, 255, 0.1);
 }

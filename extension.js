@@ -1,5 +1,5 @@
 /*
- * Lightning Search
+ * Lightning Search Launcher
  *
  * Copyright (C) 2026 Avimanyu Rimal, Mihier Kansal
  *
@@ -39,7 +39,7 @@ const FILE_QUERY_MIN_LENGTH = 2;
 const FILE_QUERY_MAX_APP_ITEMS = 4;
 
 // Fallback; the user-visible name comes from metadata.json (this.metadata.name).
-const FALLBACK_NAME = "Lightning Search";
+const FALLBACK_NAME = "Lightning Search Launcher";
 const SCHEMA_ID = "org.gnome.shell.extensions.lightning-search";
 const PANEL_BUTTON_ROLE = "lightning-search";
 

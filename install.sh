@@ -55,7 +55,7 @@ esac
 info "Installed to: ${EXT_DEST_DIR}"
 echo
 echo "  Log out and back in."
-echo "  Open the Extension Manager, toggle the extension ON under Lightning Search, click the gear icon, and choose your preferred keyboard shortcut. Or if you want to stick with the defaults just run ./enable.sh after logging back in."
+echo "  Open the Extension Manager, toggle the extension ON under Lightning Search Launcher, click the gear icon, and choose your preferred keyboard shortcut. Or if you want to stick with the defaults just run ./enable.sh after logging back in."
 echo "  Once enabled, you can also open the launcher from the terminal with: lightning-search"
 echo
 info "Done."
