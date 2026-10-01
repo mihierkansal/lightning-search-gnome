@@ -27,11 +27,17 @@ To pack it for upload to [extensions.gnome.org](https://extensions.gnome.org/upl
 Type to search. Use the arrow keys (or Tab) to move between results and press
 Enter to open the selected one. Escape closes the launcher.
 What you can search:
+
 **Apps**: Type part or all of the name of an app - depending on how fuzzy the matching setting is, you can omit some characters in between; for example, on "loose", typing "vsc" will bring up "Visual Studio Code."
+
 **Files**: Type part or all of a file name/path. Same fuzziness rule.
+
 **Calculator**: Type a math expression, like 4 + 3 \* 8 (it follows order of operations)
+
 **URL**: Type a URL/website, like https://example.com, example.com, localhost:3000, 192.168.1.1; Only some domains are recognized if you don't type https://, since the .something kind of naming is used for both files and websites - like .zip, .com, etc.
+
 **Web**: Shown when not very many other things (apps, files, calculator, etc) match what you typed. Defaults to Google, but you can change it.
+
 **Commands**: When the first word you type is a program installed on your PATH (for example `htop`, `git status`, `ls -la`), a "Run in background" result appears and runs the line in the background; press Shift + Enter to run it in your default terminal window instead.
 
 ## Controlling from the terminal
