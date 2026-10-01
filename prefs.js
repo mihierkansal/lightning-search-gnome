@@ -174,7 +174,7 @@ export default class Preferences extends ExtensionPreferences {
     });
     const linkButton = new Gtk.LinkButton({
       label: "Project page",
-      uri: "https://github.com/mihierkansal/lightning-gnome-launcher-extension",
+      uri: "https://github.com/mihierkansal/lightning-gnome-launcher-extension-mihierkansal",
     });
     aboutRow.add_suffix(linkButton);
     aboutGroup.add(aboutRow);

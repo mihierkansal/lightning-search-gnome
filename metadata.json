@@ -7,7 +7,7 @@
     "48", "49", "50", "51"
   ],
   "icon": "icon",
-  "url": "https://github.com/mihierkansal/lightning-gnome-launcher-extension",
+  "url": "https://github.com/mihierkansal/lightning-gnome-launcher-extension-mihierkansal",
   "schema-id": "org.gnome.shell.extensions.lightning-launcher",
   "gettext-domain": "lightning-gnome-launcher-extension",
   "version": 3,
