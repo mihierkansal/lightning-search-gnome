@@ -30,8 +30,8 @@ import {
   updateResultItems,
 } from "./lib/results.js";
 import { setFuzzyLevel } from "./lib/score.js";
-import { FileSearch } from "./lib/search.js";
 import { buildRow } from "./lib/ui.js";
+import { FileSearch } from "./lib/search/file-search.js";
 
 const SEARCH_DEBOUNCE_MS = 40;
 const TOGGLE_DEBOUNCE_MS = 200;
