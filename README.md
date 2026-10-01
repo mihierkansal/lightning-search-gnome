@@ -16,6 +16,10 @@ Run the installer:
 You'll be instructed how to configure the launcher.
 Defaults to Control + Super + Space to open it.
 
+## Packaging
+
+To pack it for upload to [extensions.gnome.org](https://extensions.gnome.org/upload/), run `./pack.sh`. It creates the zip file in the project directory, gitignored.
+
 ## Usage
 
 Type to search. Use the arrow keys (or Tab) to move between results and press

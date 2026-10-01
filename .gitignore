@@ -1,0 +1,3 @@
+# Packaging output from ./pack.sh
+*.shell-extension.zip
+/dist/
