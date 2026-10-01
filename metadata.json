@@ -1,0 +1,21 @@
+{
+  "name": "Spotlight Launcher for GNOME",
+  "description": "Spotlight-inspired application launcher for GNOME.",
+  "author": "Mihier Kansal",
+  "uuid": "lightning-gnome-launcher@mihierkansal",
+  "shell-version": [
+    "48", "49", "50", "51"
+  ],
+  "icon": "icon",
+  "url": "https://github.com/mihierkansal/lightning-gnome-launcher-extension",
+  "schema-id": "org.gnome.shell.extensions.lightning-launcher",
+  "gettext-domain": "lightning-gnome-launcher-extension",
+  "version": 3,
+  "keywords": [
+    "launcher",
+    "search",
+    "spotlight",
+    "application",
+    "productivity"
+  ]
+}

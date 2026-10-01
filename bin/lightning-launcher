@@ -1,0 +1,68 @@
+#!/bin/sh
+#
+# Spotlight Launcher for GNOME, terminal control command
+#
+# Copyright (C) 2026 Avimanyu Rimal, Mihier Kansal
+#
+# Licensed under the GNU GPL v3 or later.
+# See LICENSE file for details.
+#
+# Usage: lightning-launcher [toggle|open|hide|search QUERY]
+
+set -eu
+
+BUS_NAME="org.gnome.Shell.Extensions.LightningLauncher"
+OBJECT_PATH="/org/gnome/Shell/Extensions/LightningLauncher"
+
+usage() {
+  cat <<'EOF'
+Usage: lightning-launcher [COMMAND]
+
+Commands:
+  toggle          Toggle the launcher (default)
+  open            Open the launcher, clearing the previous query
+  hide            Close the launcher
+  search QUERY    Open the launcher with QUERY pre-filled
+
+Examples:
+  lightning-launcher
+  lightning-launcher search "invoice"
+EOF
+}
+
+command=${1:-toggle}
+shift || true
+
+case "$command" in
+  toggle) method="Toggle" ;;
+  open) method="Open" ;;
+  hide) method="Hide" ;;
+  search)
+    if [ "$#" -eq 0 ]; then
+      echo "lightning-launcher: 'search' needs a query" >&2
+      exit 2
+    fi
+    method="Search"
+    ;;
+  -h | --help | help)
+    usage
+    exit 0
+    ;;
+  *)
+    echo "lightning-launcher: unknown command '$command'" >&2
+    usage >&2
+    exit 2
+    ;;
+esac
+
+if [ "$command" = "search" ]; then
+  gdbus call --session --dest "$BUS_NAME" --object-path "$OBJECT_PATH" \
+    --method "$BUS_NAME.$method" "$*" >/dev/null
+else
+  gdbus call --session --dest "$BUS_NAME" --object-path "$OBJECT_PATH" \
+    --method "$BUS_NAME.$method" >/dev/null
+fi || {
+  echo "lightning-launcher: could not reach $BUS_NAME." >&2
+  echo "Is the Spotlight Launcher extension enabled for this session?" >&2
+  exit 1
+}

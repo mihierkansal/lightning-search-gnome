@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.lightning-launcher"
+    path="/org/gnome/shell/extensions/lightning-launcher/"
+    gettext-domain="lightning-gnome-launcher-extension">
+
+    <!-- Keybinding to open launcher -->
+    <key type="as" name="shortcut-key">
+      <default>["&lt;Control&gt;&lt;Super&gt;space"]</default>
+      <summary>Keyboard shortcut to open launcher search</summary>
+      <description>Global keybinding to open GNOME search (recommended:
+        ["&lt;Control&gt;&lt;Super&gt;space"])</description>
+    </key>
+
+    <!-- Web search engine URL; %s is replaced with the URL-encoded query -->
+    <key type="s" name="search-engine-url">
+      <default>"https://www.google.com/search?q=%s"</default>
+      <summary>Web search engine URL</summary>
+      <description>URL opened for the web-search fallback. %s is replaced with the URL-encoded
+        query, e.g. https://duckduckgo.com/?q=%s, https://noai.duckduckgo.com/?q=%s,
+        https://www.google.com/search?q=%s, or
+        https://www.google.com/search?q=%s&amp;udm=web
+        (the &amp;udm=web disables AI Overviews; by default it is not present, so AI overviews will
+        be shown)</description>
+    </key>
+
+    <!-- Text shown in the launcher search box while it is empty -->
+    <key type="s" name="search-placeholder-text">
+      <default>"Spotlight Search"</default>
+      <summary>Placeholder text for the launcher search box</summary>
+      <description>Hint text shown in the launcher search box when no query has
+        been typed, e.g., "Type to search..." or "Spotlight Search".</description>
+    </key>
+
+    <!-- Background color of the highlighted result row (any CSS color) -->
+    <key type="s" name="selection-color">
+      <default>"rgba(0, 122, 255, 0.9)"</default>
+      <summary>Selected result color</summary>
+      <description>CSS color used as the background of the highlighted result row.</description>
+    </key>
+
+    <!-- Show a search icon on the right of the top panel -->
+    <key type="b" name="show-panel-icon">
+      <default>true</default>
+      <summary>Show search icon in the top panel</summary>
+      <description>Adds a search icon to the right of the top panel that opens the
+        launcher when clicked.</description>
+    </key>
+
+    <!-- Show the magnifying glass icon inside the launcher search box -->
+    <key type="b" name="show-entry-icon">
+      <default>true</default>
+      <summary>Show search icon in the launcher</summary>
+      <description>Show the magnifying glass icon next to the launcher search box.
+      </description>
+    </key>
+
+    <!-- Size of the magnifying glass inside the fixed 28px icon container -->
+    <key type="i" name="entry-icon-size">
+      <default>21</default>
+      <range min="12" max="28" />
+      <summary>Launcher search icon size</summary>
+      <description>Pixel size of the magnifying glass drawn inside the launcher
+        search box. </description>
+    </key>
+
+    <!-- How loosely a typed query may match application and file names -->
+    <key type="s" name="fuzzy-level">
+      <choices>
+        <choice value="off" />
+        <choice value="balanced" />
+        <choice value="loose" />
+      </choices>
+      <default>"balanced"</default>
+      <summary>Fuzzy matching tolerance</summary>
+      <description>How strictly a query has to match a name, ignoring case. If it's off, it will be
+        substring matches only. If it's balanced, then the first letter must match a word in the
+        title, and far matches (like "vsc" -&gt; "Visual Studio Code") won't come up. If it's loose,
+        then as long as the characters in the query appear in the same order in the app name/file
+        path, even if they are far apart, it will match. So, if you type "dj879",
+        "~/Documents/Clients/John-Doe/IRS-Form-8879.pdf" WILL come up.</description>
+    </key>
+
+  </schema>
+</schemalist>

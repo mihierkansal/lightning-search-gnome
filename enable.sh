@@ -1,0 +1,1 @@
+gnome-extensions enable lightning-gnome-launcher@mihierkansal

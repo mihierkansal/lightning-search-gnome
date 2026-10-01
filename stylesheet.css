@@ -1,0 +1,77 @@
+#panel .panel-button.lightning-panel-button {
+  -natural-hpadding: 4px;
+  -minimum-hpadding: 2px;
+}
+
+#panel .panel-button.lightning-panel-button .system-status-icon {
+  padding: 0;
+  margin: 0;
+}
+
+.lightning-overlay {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.lightning-launcher-box {
+  padding: 0;
+  margin-top: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.lightning-entry-row {
+  margin-top: 10px;
+  margin-left: 11px;
+  margin-right: 11px;
+  margin-bottom: 12px;
+  spacing: 10px;
+}
+
+.lightning-entry-icon-box {
+  width: 32px;
+  height: 32px;
+}
+
+.lightning-entry {
+  padding: 0 !important;
+  margin: 0;
+  border: 0 !important;
+  font-size: 1.25em;
+  color: white;
+  background-color: transparent;
+}
+
+.lightning-entry:focus {
+  border: 0 !important;
+  background-color: transparent;
+}
+
+.lightning-results {
+  padding: 6px;
+  spacing: 2px;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+}
+
+.lightning-result-row {
+  padding: 9px;
+  border-radius: 8px;
+  background-color: transparent;
+  text-align: left;
+  border: none;
+}
+
+.lightning-result-icon {
+  margin-right: 10px;
+  width: 32px;
+  height: 32px;
+}
+
+.lightning-result-title {
+  font-size: 0.975em;
+  font-weight: 550;
+  margin-bottom: 1px;
+}
+
+.lightning-result-subtitle {
+  opacity: 0.9;
+  font-size: 0.85em;
+}
