@@ -35,7 +35,7 @@ install -D -m 0644 \
   "${EXT_SRC_DIR}/extension.js" \
   "${EXT_SRC_DIR}/prefs.js" \
   "${EXT_SRC_DIR}/shortcuts.js" \
-  "${EXT_SRC_DIR}/stylesheet.css" \ 
+  "${EXT_SRC_DIR}/stylesheet.css" \
   "${EXT_SRC_DIR}/metadata.json" \
   -t "${EXT_DEST_DIR}/"
 
