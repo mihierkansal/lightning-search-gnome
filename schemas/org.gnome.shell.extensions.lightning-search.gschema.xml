@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
-  <schema id="org.gnome.shell.extensions.lightning-launcher"
-    path="/org/gnome/shell/extensions/lightning-launcher/"
-    gettext-domain="lightning-gnome-launcher-extension">
+  <schema id="org.gnome.shell.extensions.lightning-search"
+    path="/org/gnome/shell/extensions/lightning-search/"
+    gettext-domain="lightning-search">
 
     <!-- Keybinding to open launcher -->
     <key type="as" name="shortcut-key">
@@ -26,10 +26,10 @@
 
     <!-- Text shown in the launcher search box while it is empty -->
     <key type="s" name="search-placeholder-text">
-      <default>"Spotlight Search"</default>
+      <default>"Search"</default>
       <summary>Placeholder text for the launcher search box</summary>
       <description>Hint text shown in the launcher search box when no query has
-        been typed, e.g., "Type to search..." or "Spotlight Search".</description>
+        been typed, e.g., "Type to search..." or "Search".</description>
     </key>
 
     <!-- Background color of the highlighted result row (any CSS color) -->
@@ -37,6 +37,13 @@
       <default>"rgba(0, 122, 255, 0.9)"</default>
       <summary>Selected result color</summary>
       <description>CSS color used as the background of the highlighted result row.</description>
+    </key>
+
+    <!-- Text color of the title and subtitle of the highlighted result row -->
+    <key type="s" name="selection-text-color">
+      <default>"white"</default>
+      <summary>Selected result text color</summary>
+      <description>Color used for the title and subtitle text of the highlighted result row.</description>
     </key>
 
     <!-- Show a search icon on the right of the top panel -->

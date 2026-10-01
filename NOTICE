@@ -1,0 +1,10 @@
+Lightning Search
+Copyright (C) 2026 Avimanyu Rimal, Mihier Kansal
+
+Licensed under the GNU GPL v3 or later. See LICENSE for details.
+
+This extension is a fork of Lightning GNOME Launcher by Avimanyu Rimal:
+https://gitlab.com/rimal.avimanyu/lightning-gnome-launcher-extension
+
+Changes from the original: styling improved, animations added, file
+search improved, URL searching added, calculator logic cleaned up.

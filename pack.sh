@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Spotlight Launcher for GNOME, packaging for extensions.gnome.org
+# Lightning Search, packaging for extensions.gnome.org
 #
 # Copyright (C) 2026 Avimanyu Rimal, Mihier Kansal
 #
@@ -11,7 +11,7 @@
 # 
 set -euo pipefail
 
-EXTENSION_UUID="lightning-gnome-launcher@mihierkansal"
+EXTENSION_UUID="lightning-search@mihierkansal.github.io"
 
 EXT_SRC_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 OUT_DIR="${1:-${EXT_SRC_DIR}}"
@@ -34,7 +34,8 @@ gnome-extensions pack "${EXT_SRC_DIR}" \
   --out-dir="${OUT_DIR}" \
   --extra-source=shortcuts.js \
   --extra-source=lib \
-  --extra-source=LICENSE
+  --extra-source=LICENSE \
+  --extra-source=NOTICE
 
 PACK="${OUT_DIR}/${EXTENSION_UUID}.shell-extension.zip"
 info "Created ${PACK}"

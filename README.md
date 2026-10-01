@@ -1,8 +1,10 @@
-# Spotlight GNOME Launcher
+# Lightning Search
 
 ## About
 
-Spotlight GNOME Launcher is a lightweight launcher that looks like macOS's Spotlight. It searches files, apps, and the web, and even evaluates calculations, right from a single search box.
+Lightning Search is a fast, minimal search launcher for GNOME. From a single
+search box it searches applications and files, evaluates calculations, and opens
+URLs or web searches.
 
 ## Installation
 
@@ -40,18 +42,18 @@ keybinding can open the launcher.
 The installer places a command in `~/.local/bin`:
 
 ```bash
-lightning-launcher open
-lightning-launcher hide
-lightning-launcher search "Some search term"
+lightning-search open
+lightning-search hide
+lightning-search search "Some search term"
 ```
 
 Alternatively:
 
 ```bash
 gdbus call --session \
-  --dest org.gnome.Shell.Extensions.LightningLauncher \
-  --object-path /org/gnome/Shell/Extensions/LightningLauncher \
-  --method org.gnome.Shell.Extensions.LightningLauncher.Toggle
+  --dest org.gnome.Shell.Extensions.LightningSearch \
+  --object-path /org/gnome/Shell/Extensions/LightningSearch \
+  --method org.gnome.Shell.Extensions.LightningSearch.Toggle
 ```
 
 ## Configuration
@@ -91,4 +93,4 @@ Copyright (C) 2026 Avimanyu Rimal, Mihier Kansal
 This project is licensed under the GNU General Public License v3 or later.
 See the LICENSE file for details.
 
-Forked from https://gitlab.com/rimal.avimanyu/lightning-gnome-launcher-extension, styling modified, animations added, file search improved.
+Forked from https://gitlab.com/rimal.avimanyu/lightning-gnome-launcher-extension, see NOTICE.

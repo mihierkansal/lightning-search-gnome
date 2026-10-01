@@ -1,1 +1,1 @@
-gnome-extensions enable lightning-gnome-launcher@mihierkansal
+gnome-extensions enable lightning-search@mihierkansal.github.io

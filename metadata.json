@@ -1,21 +1,13 @@
 {
-  "name": "Spotlight Launcher for GNOME",
-  "description": "Spotlight-inspired application launcher for GNOME.",
-  "author": "Mihier Kansal",
-  "uuid": "lightning-gnome-launcher@mihierkansal",
+  "name": "Lightning Search",
+  "description": "A fast, minimal search launcher for GNOME. Search applications and files, evaluate calculations, and open URLs or web searches from a single search box.",
+  "uuid": "lightning-search@mihierkansal.github.io",
+  "gettext-domain": "lightning-search",
   "shell-version": [
-    "48", "49", "50", "51"
+    "48",
+    "49",
+    "50",
+    "51"
   ],
-  "icon": "icon",
-  "url": "https://github.com/mihierkansal/lightning-gnome-launcher-extension-mihierkansal",
-  "schema-id": "org.gnome.shell.extensions.lightning-launcher",
-  "gettext-domain": "lightning-gnome-launcher-extension",
-  "version": 3,
-  "keywords": [
-    "launcher",
-    "search",
-    "spotlight",
-    "application",
-    "productivity"
-  ]
+  "url": "https://github.com/mihierkansal/lightning-search-gnome"
 }

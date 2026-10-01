@@ -1,9 +1,9 @@
 {
-  "name": "lightning-gnome-launcher",
+  "name": "lightning-search",
   "version": "3.0.0",
   "private": true,
   "type": "module",
-  "description": "Spotlight-inspired GNOME Shell launcher extension",
+  "description": "Lightning Search, a fast search launcher for GNOME Shell",
   "scripts": {
     "check": "for f in extension.js prefs.js shortcuts.js lib/*.js lib/search/*.js; do node --check \"$f\" || exit 1; done",
     "pack": "./pack.sh"

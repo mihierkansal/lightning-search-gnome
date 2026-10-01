@@ -1,22 +1,22 @@
 #!/bin/sh
 #
-# Spotlight Launcher for GNOME, terminal control command
+# Lightning Search, terminal control command
 #
 # Copyright (C) 2026 Avimanyu Rimal, Mihier Kansal
 #
 # Licensed under the GNU GPL v3 or later.
 # See LICENSE file for details.
 #
-# Usage: lightning-launcher [toggle|open|hide|search QUERY]
+# Usage: lightning-search [toggle|open|hide|search QUERY]
 
 set -eu
 
-BUS_NAME="org.gnome.Shell.Extensions.LightningLauncher"
-OBJECT_PATH="/org/gnome/Shell/Extensions/LightningLauncher"
+BUS_NAME="org.gnome.Shell.Extensions.LightningSearch"
+OBJECT_PATH="/org/gnome/Shell/Extensions/LightningSearch"
 
 usage() {
   cat <<'EOF'
-Usage: lightning-launcher [COMMAND]
+Usage: lightning-search [COMMAND]
 
 Commands:
   toggle          Toggle the launcher (default)
@@ -25,13 +25,17 @@ Commands:
   search QUERY    Open the launcher with QUERY pre-filled
 
 Examples:
-  lightning-launcher
-  lightning-launcher search "invoice"
+  lightning-search
+  lightning-search search "invoice"
 EOF
 }
 
 command=${1:-toggle}
-shift || true
+# Guard the shift: dash prints "can't shift that many" to stderr when
+# there are no positional parameters, and `|| true` cannot suppress that.
+if [ "$#" -gt 0 ]; then
+  shift
+fi
 
 case "$command" in
   toggle) method="Toggle" ;;
@@ -39,7 +43,7 @@ case "$command" in
   hide) method="Hide" ;;
   search)
     if [ "$#" -eq 0 ]; then
-      echo "lightning-launcher: 'search' needs a query" >&2
+      echo "lightning-search: 'search' needs a query" >&2
       exit 2
     fi
     method="Search"
@@ -49,7 +53,7 @@ case "$command" in
     exit 0
     ;;
   *)
-    echo "lightning-launcher: unknown command '$command'" >&2
+    echo "lightning-search: unknown command '$command'" >&2
     usage >&2
     exit 2
     ;;
@@ -62,7 +66,7 @@ else
   gdbus call --session --dest "$BUS_NAME" --object-path "$OBJECT_PATH" \
     --method "$BUS_NAME.$method" >/dev/null
 fi || {
-  echo "lightning-launcher: could not reach $BUS_NAME." >&2
-  echo "Is the Spotlight Launcher extension enabled for this session?" >&2
+  echo "lightning-search: could not reach $BUS_NAME." >&2
+  echo "Is the Lightning Search extension enabled for this session?" >&2
   exit 1
 }

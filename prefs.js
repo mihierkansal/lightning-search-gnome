@@ -1,5 +1,5 @@
 /*
- * Spotlight Launcher for GNOME
+ * Lightning Search
  *
  * Copyright (C) 2026 Avimanyu Rimal
  *
@@ -17,7 +17,6 @@ import { ExtensionPreferences } from "resource:///org/gnome/Shell/Extensions/js/
 const DEFAULT_SELECTION_COLOR = "rgba(0, 122, 255, 0.9)";
 
 const FUZZY_LEVELS = ["off", "balanced", "loose"];
-const FUZZY_LEVEL_LABELS = ["Off", "Balanced", "Loose"];
 
 function parseCssColor(css) {
   const rgba = new Gdk.RGBA();
@@ -35,30 +34,33 @@ function toCssColor({ red, green, blue, alpha }) {
 
 export default class Preferences extends ExtensionPreferences {
   fillPreferencesWindow(window) {
+    const _ = this.gettext.bind(this);
     const settings = this.getSettings(
-      "org.gnome.shell.extensions.lightning-launcher",
+      "org.gnome.shell.extensions.lightning-search",
     );
+
+    const fuzzyLevelLabels = [_("Off"), _("Balanced"), _("Loose")];
 
     const page = new Adw.PreferencesPage();
     const shortcutsGroup = new Adw.PreferencesGroup({
-      title: "Shortcut",
-      description: "Choose your launcher shortcut.",
+      title: _("Shortcut"),
+      description: _("Choose your launcher shortcut."),
     });
 
     const shortcutRow = new Adw.ActionRow({
-      title: "Open launcher",
-      subtitle: "Press this keybinding to open search",
+      title: _("Open launcher"),
+      subtitle: _("Press this keybinding to open search"),
     });
     shortcutRow.add_suffix(new ShortcutSettingWidget(settings, "shortcut-key"));
     shortcutsGroup.add(shortcutRow);
 
     const panelGroup = new Adw.PreferencesGroup({
-      title: "Panel",
-      description: "Top bar integration.",
+      title: _("Panel"),
+      description: _("Top bar integration."),
     });
     const panelIconRow = new Adw.SwitchRow({
-      title: "Show search icon",
-      subtitle: "Add a search button to the right of the top bar",
+      title: _("Show search icon"),
+      subtitle: _("Add a search button to the right of the top bar"),
     });
     panelIconRow.active = settings.get_boolean("show-panel-icon");
     panelIconRow.connect("notify::active", () => {
@@ -67,11 +69,11 @@ export default class Preferences extends ExtensionPreferences {
     panelGroup.add(panelIconRow);
 
     const launcherGroup = new Adw.PreferencesGroup({
-      title: "Launcher",
-      description: "Customize the launcher search box.",
+      title: _("Launcher"),
+      description: _("Customize the launcher search box."),
     });
     const placeholderRow = new Adw.EntryRow({
-      title: "Placeholder text",
+      title: _("Placeholder text"),
       show_apply_button: true,
     });
     placeholderRow.text = settings.get_string("search-placeholder-text");
@@ -81,15 +83,15 @@ export default class Preferences extends ExtensionPreferences {
     launcherGroup.add(placeholderRow);
 
     const entryIconRow = new Adw.SwitchRow({
-      title: "Show search icon",
-      subtitle: "Show the magnifying glass next to the search box",
+      title: _("Show search icon"),
+      subtitle: _("Show the magnifying glass next to the search box"),
     });
     entryIconRow.active = settings.get_boolean("show-entry-icon");
     launcherGroup.add(entryIconRow);
 
     const entryIconSizeRow = new Adw.SpinRow({
-      title: "Search icon size",
-      subtitle: "Resize the glyph without moving the search box text",
+      title: _("Search icon size"),
+      subtitle: _("Resize the glyph without moving the search box text"),
       adjustment: new Gtk.Adjustment({
         lower: 12,
         upper: 28,
@@ -109,14 +111,15 @@ export default class Preferences extends ExtensionPreferences {
     launcherGroup.add(entryIconSizeRow);
 
     const matchingGroup = new Adw.PreferencesGroup({
-      title: "Matching",
-      description: "How loosely a typed query matches application names.",
+      title: _("Matching"),
+      description: _("How loosely a typed query matches application names."),
     });
     const fuzzyRow = new Adw.ComboRow({
-      title: "Fuzzy matching",
-      subtitle:
+      title: _("Fuzzy matching"),
+      subtitle: _(
         "Off matches letters in order only; Loose also matches initials",
-      model: Gtk.StringList.new(FUZZY_LEVEL_LABELS),
+      ),
+      model: Gtk.StringList.new(fuzzyLevelLabels),
     });
     fuzzyRow.selected = Math.max(
       0,
@@ -128,12 +131,12 @@ export default class Preferences extends ExtensionPreferences {
     matchingGroup.add(fuzzyRow);
 
     const appearanceGroup = new Adw.PreferencesGroup({
-      title: "Appearance",
-      description: "Colors used by the launcher.",
+      title: _("Appearance"),
+      description: _("Colors used by the launcher."),
     });
     const selectionColorRow = new Adw.ActionRow({
-      title: "Selected result color",
-      subtitle: "Background of the highlighted result row",
+      title: _("Selected result color"),
+      subtitle: _("Background of the highlighted result row"),
     });
     const colorButton = new Gtk.ColorDialogButton({
       dialog: new Gtk.ColorDialog({ with_alpha: true }),
@@ -146,13 +149,31 @@ export default class Preferences extends ExtensionPreferences {
     selectionColorRow.add_suffix(colorButton);
     appearanceGroup.add(selectionColorRow);
 
+    const selectionTextColorRow = new Adw.ActionRow({
+      title: _("Selected result text color"),
+      subtitle: _("Title and subtitle text color of the highlighted result row"),
+    });
+    const textColorButton = new Gtk.ColorDialogButton({
+      dialog: new Gtk.ColorDialog({ with_alpha: true }),
+      rgba: parseCssColor(settings.get_string("selection-text-color")),
+    });
+    textColorButton.valign = Gtk.Align.CENTER;
+    textColorButton.connect("notify::rgba", () => {
+      settings.set_string(
+        "selection-text-color",
+        toCssColor(textColorButton.rgba),
+      );
+    });
+    selectionTextColorRow.add_suffix(textColorButton);
+    appearanceGroup.add(selectionTextColorRow);
+
     const searchGroup = new Adw.PreferencesGroup({
-      title: "Search",
-      description: "Engine used for the “Search web” fallback result.",
+      title: _("Search"),
+      description: _("Engine used for the “Search web” fallback result."),
     });
 
     const engineRow = new Adw.EntryRow({
-      title: "Search engine URL",
+      title: _("Search engine URL"),
       show_apply_button: true,
     });
     engineRow.text = settings.get_string("search-engine-url");
@@ -166,15 +187,15 @@ export default class Preferences extends ExtensionPreferences {
     searchGroup.add(engineRow);
 
     const aboutGroup = new Adw.PreferencesGroup({
-      title: "About",
+      title: _("About"),
     });
     const aboutRow = new Adw.ActionRow({
-      title: "Spotlight Launcher for GNOME",
-      subtitle: "JS-only GNOME launcher shortcut extension",
+      title: this.metadata.name,
+      subtitle: _("A fast search launcher for GNOME"),
     });
     const linkButton = new Gtk.LinkButton({
-      label: "Project page",
-      uri: "https://github.com/mihierkansal/lightning-gnome-launcher-extension-mihierkansal",
+      label: _("Project page"),
+      uri: "https://github.com/mihierkansal/lightning-search-gnome",
     });
     aboutRow.add_suffix(linkButton);
     aboutGroup.add(aboutRow);

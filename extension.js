@@ -1,5 +1,5 @@
 /*
- * Spotlight Launcher for GNOME
+ * Lightning Search
  *
  * Copyright (C) 2026 Avimanyu Rimal, Mihier Kansal
  *
@@ -37,12 +37,13 @@ const TOGGLE_DEBOUNCE_MS = 200;
 const FILE_QUERY_MIN_LENGTH = 2;
 const FILE_QUERY_MAX_APP_ITEMS = 4;
 
-const EXTENSION_NAME = "Lightning Launcher";
-const SCHEMA_ID = "org.gnome.shell.extensions.lightning-launcher";
-const PANEL_BUTTON_ROLE = "lightning-launcher";
+// Fallback; the user-visible name comes from metadata.json (this.metadata.name).
+const FALLBACK_NAME = "Lightning Search";
+const SCHEMA_ID = "org.gnome.shell.extensions.lightning-search";
+const PANEL_BUTTON_ROLE = "lightning-search";
 
-const DBUS_BUS_NAME = "org.gnome.Shell.Extensions.LightningLauncher";
-const DBUS_OBJECT_PATH = "/org/gnome/Shell/Extensions/LightningLauncher";
+const DBUS_BUS_NAME = "org.gnome.Shell.Extensions.LightningSearch";
+const DBUS_OBJECT_PATH = "/org/gnome/Shell/Extensions/LightningSearch";
 const DBUS_INTERFACE_XML = `
 <node>
   <interface name="${DBUS_BUS_NAME}">
@@ -55,13 +56,19 @@ const DBUS_INTERFACE_XML = `
   </interface>
 </node>`;
 
-export default class LightningLauncherExtension extends Extension {
+export default class LightningSearchExtension extends Extension {
+  get _displayName() {
+    return this.metadata?.name ?? FALLBACK_NAME;
+  }
+
   enable() {
+    this._gettext = this.gettext.bind(this);
     this._settings = this.getSettings(SCHEMA_ID);
     this._syncFuzzyLevel();
 
     this._view = new LauncherView(this._placeholderText());
     this._view.selectionColor = this._selectionColor();
+    this._view.selectionTextColor = this._selectionTextColor();
     this._syncEntryIcon();
     this._view.handlers = {
       onQueryChanged: () => this._onQueryChanged(),
@@ -87,6 +94,11 @@ export default class LightningLauncherExtension extends Extension {
     this._selectionColorChangedId = this._settings.connect(
       "changed::selection-color",
       () => this._syncSelectionColor(),
+    );
+
+    this._selectionTextColorChangedId = this._settings.connect(
+      "changed::selection-text-color",
+      () => this._syncSelectionTextColor(),
     );
 
     this._entryIconChangedId = this._settings.connect(
@@ -135,6 +147,10 @@ export default class LightningLauncherExtension extends Extension {
       this._settings.disconnect(this._selectionColorChangedId);
       this._selectionColorChangedId = 0;
     }
+    if (this._selectionTextColorChangedId) {
+      this._settings.disconnect(this._selectionTextColorChangedId);
+      this._selectionTextColorChangedId = 0;
+    }
     if (this._entryIconChangedId) {
       this._settings.disconnect(this._entryIconChangedId);
       this._entryIconChangedId = 0;
@@ -176,12 +192,14 @@ export default class LightningLauncherExtension extends Extension {
 
     if (this._shortcuts.listenFor(FALLBACK_SHORTCUT, toggle)) {
       Main.notify(
-        EXTENSION_NAME,
-        `${preferred} unavailable, using ${FALLBACK_SHORTCUT}`,
+        this._displayName,
+        this._gettext(`${preferred} unavailable, using ${FALLBACK_SHORTCUT}`),
       );
       return;
     }
-    console.error(`[${EXTENSION_NAME}] Could not register any shortcut`);
+    console.error(
+      `[${this._displayName}] ${this._gettext("Could not register any shortcut")}`,
+    );
   }
 
   _placeholderText() {
@@ -198,6 +216,14 @@ export default class LightningLauncherExtension extends Extension {
 
   _syncSelectionColor() {
     if (this._view) this._view.selectionColor = this._selectionColor();
+  }
+
+  _selectionTextColor() {
+    return this._settings.get_string("selection-text-color");
+  }
+
+  _syncSelectionTextColor() {
+    if (this._view) this._view.selectionTextColor = this._selectionTextColor();
   }
 
   _syncEntryIcon() {
@@ -240,7 +266,7 @@ export default class LightningLauncherExtension extends Extension {
       this._dbus.export(Gio.DBus.session, DBUS_OBJECT_PATH);
     } catch (error) {
       console.error(
-        `[${EXTENSION_NAME}] Could not export control interface: ${error}`,
+        `[${this._displayName}] Could not export control interface: ${error}`,
       );
       this._dbus = null;
       return;
@@ -347,7 +373,7 @@ export default class LightningLauncherExtension extends Extension {
     const token = this._files.beginSearch();
     this._selectedIndex = 0;
 
-    const sources = this._collectSources(query);
+    const sources = this._collectSources(query, this._gettext);
     const wantsFiles = this._shouldSearchFiles(query, sources.apps.length);
     if (wantsFiles) {
       sources.files = this._files.interimMatches(query);
@@ -357,19 +383,26 @@ export default class LightningLauncherExtension extends Extension {
     if (wantsFiles) this._searchFiles(query, token, sources);
   }
 
-  _collectSources(query) {
-    const apps = makeAppItems(loadApps(Shell.AppSystem.get_default()), query);
-    const calculator = [makeCalcItem(query)].filter(Boolean);
-    const url = [makeUrlItem(query)].filter(Boolean);
-    const web = url.length ? [] : [makeWebItem(query, this._engineName())];
+  _collectSources(query, _) {
+    const apps = makeAppItems(
+      loadApps(Shell.AppSystem.get_default()),
+      query,
+      _,
+    );
+    const calculator = [makeCalcItem(query, _)].filter(Boolean);
+    const url = [makeUrlItem(query, _)].filter(Boolean);
+    const web = url.length ? [] : [makeWebItem(query, this._engineName(), _)];
     return { apps, calculator, url, web, files: [] };
   }
 
   _engineName() {
     try {
-      return engineNameFromUrl(this._settings.get_string("search-engine-url"));
+      return engineNameFromUrl(
+        this._settings.get_string("search-engine-url"),
+        this._gettext,
+      );
     } catch (_error) {
-      return "Web search";
+      return this._gettext("Web search");
     }
   }
 
@@ -382,7 +415,9 @@ export default class LightningLauncherExtension extends Extension {
         this._render(sources);
       })
       .catch((error) =>
-        console.debug(`[Lightning] File search failed: ${error.message}`),
+        console.debug(
+          `[${this._displayName}] File search failed: ${error.message}`,
+        ),
       );
   }
 
@@ -443,7 +478,7 @@ export default class LightningLauncherExtension extends Extension {
         },
       });
     } catch (error) {
-      console.error(`[Lightning] Failed to activate: ${error}`);
+      console.error(`[${this._displayName}] Failed to activate: ${error}`);
     }
 
     this._hideLauncher();

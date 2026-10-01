@@ -2,8 +2,8 @@
 
 set -euo pipefail
  
-EXTENSION_UUID="lightning-gnome-launcher@mihierkansal"
-SCHEMA_ID="org.gnome.shell.extensions.lightning-launcher"
+EXTENSION_UUID="lightning-search@mihierkansal.github.io"
+SCHEMA_ID="org.gnome.shell.extensions.lightning-search"
 
 EXT_SRC_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 EXT_DEST_DIR="${XDG_DATA_HOME:-${HOME}/.local/share}/gnome-shell/extensions/${EXTENSION_UUID}"
@@ -44,18 +44,18 @@ install -d "${EXT_DEST_DIR}/lib/search"
 install -m 0644 "${EXT_SRC_DIR}"/lib/*.js -t "${EXT_DEST_DIR}/lib/"
 install -m 0644 "${EXT_SRC_DIR}"/lib/search/*.js -t "${EXT_DEST_DIR}/lib/search/"
 
-info "Installing the lightning-launcher command..."
+info "Installing the lightning-search command..."
 mkdir -p "${EXT_BIN_DIR}"
-install -m 0755 "${EXT_SRC_DIR}/bin/lightning-launcher" -t "${EXT_BIN_DIR}"
+install -m 0755 "${EXT_SRC_DIR}/bin/lightning-search" -t "${EXT_BIN_DIR}"
 case ":${PATH}:" in
   *":${EXT_BIN_DIR}:"*) ;;
-  *) warn "${EXT_BIN_DIR} is not in your PATH; add it to use the lightning-launcher command." ;;
+  *) warn "${EXT_BIN_DIR} is not in your PATH; add it to use the lightning-search command." ;;
 esac
 
 info "Installed to: ${EXT_DEST_DIR}"
 echo
 echo "  Log out and back in."
-echo "  Open the Extension Manager, toggle the extension ON under Spotlight Launcher for GNOME Extension, click the gear icon, and choose your preferred keyboard shortcut. Or if you want to stick with the defaults just run ./enable.sh after logging back in."
-echo "  Once enabled, you can also open the launcher from the terminal with: lightning-launcher"
+echo "  Open the Extension Manager, toggle the extension ON under Lightning Search, click the gear icon, and choose your preferred keyboard shortcut. Or if you want to stick with the defaults just run ./enable.sh after logging back in."
+echo "  Once enabled, you can also open the launcher from the terminal with: lightning-search"
 echo
 info "Done."
