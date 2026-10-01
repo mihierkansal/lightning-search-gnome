@@ -26,13 +26,16 @@ export const ShortcutSettingWidget = class extends Gtk.Button {
     );
   }
 
-  constructor(settings, key) {
+  constructor(settings, key, gettext = (text) => text) {
     super({ valign: Gtk.Align.CENTER, has_frame: false });
     this._settings = settings;
     this._key = key;
+    this._gettext = gettext;
     this.connect("clicked", this._onActivated.bind(this));
 
-    const label = new Gtk.ShortcutLabel({ disabled_text: "Set shortcut..." });
+    const label = new Gtk.ShortcutLabel({
+      disabled_text: this._gettext("Set shortcut…"),
+    });
     this.set_child(label);
     this.bind_property(
       "shortcut",
@@ -48,7 +51,7 @@ export const ShortcutSettingWidget = class extends Gtk.Button {
 
     if (!this._editor) {
       this._editor = new Gtk.Window({
-        title: "Set Shortcut",
+        title: this._gettext("Set Shortcut"),
         modal: true,
         hide_on_close: true,
         transient_for: widget.get_root(),
@@ -57,7 +60,9 @@ export const ShortcutSettingWidget = class extends Gtk.Button {
       });
       this._editor.set_child(
         new Gtk.Label({
-          label: "Press new shortcut\nBackspace to clear, Esc to cancel",
+          label: this._gettext(
+            "Press new shortcut\nBackspace to clear, Esc to cancel",
+          ),
           justify: Gtk.Justification.CENTER,
         }),
       );

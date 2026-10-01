@@ -51,7 +51,9 @@ export default class Preferences extends ExtensionPreferences {
       title: _("Open launcher"),
       subtitle: _("Press this keybinding to open search"),
     });
-    shortcutRow.add_suffix(new ShortcutSettingWidget(settings, "shortcut-key"));
+    shortcutRow.add_suffix(
+      new ShortcutSettingWidget(settings, "shortcut-key", _),
+    );
     shortcutsGroup.add(shortcutRow);
 
     const panelGroup = new Adw.PreferencesGroup({

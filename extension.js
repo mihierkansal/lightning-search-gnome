@@ -176,7 +176,7 @@ export default class LightningSearchExtension extends Extension {
       this._files.dispose();
       this._files = null;
     }
-    this._view.destroyWhenIdle();
+    this._view.destroy();
     this._view = null;
     this._settings = null;
   }
@@ -193,7 +193,9 @@ export default class LightningSearchExtension extends Extension {
     if (this._shortcuts.listenFor(FALLBACK_SHORTCUT, toggle)) {
       Main.notify(
         this._displayName,
-        this._gettext(`${preferred} unavailable, using ${FALLBACK_SHORTCUT}`),
+        this._gettext("%s unavailable, using %s")
+          .replace("%s", () => preferred)
+          .replace("%s", () => FALLBACK_SHORTCUT),
       );
       return;
     }
@@ -266,7 +268,7 @@ export default class LightningSearchExtension extends Extension {
       this._dbus.export(Gio.DBus.session, DBUS_OBJECT_PATH);
     } catch (error) {
       console.error(
-        `[${this._displayName}] Could not export control interface: ${error}`,
+        `[${this._displayName}] ${this._gettext("Could not export control interface")}: ${error}`,
       );
       this._dbus = null;
       return;
@@ -415,8 +417,8 @@ export default class LightningSearchExtension extends Extension {
         this._render(sources);
       })
       .catch((error) =>
-        console.debug(
-          `[${this._displayName}] File search failed: ${error.message}`,
+        console.error(
+          `[${this._displayName}] ${this._gettext("File search failed")}: ${error.message}`,
         ),
       );
   }
@@ -478,7 +480,9 @@ export default class LightningSearchExtension extends Extension {
         },
       });
     } catch (error) {
-      console.error(`[${this._displayName}] Failed to activate: ${error}`);
+      console.error(
+        `[${this._displayName}] ${this._gettext("Failed to activate")}: ${error}`,
+      );
     }
 
     this._hideLauncher();
