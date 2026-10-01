@@ -339,8 +339,19 @@ export default class LightningSearchExtension extends Extension {
     else this._showLauncher();
   }
 
+  _focusedMonitor() {
+    const focusWindow = global.display.focus_window;
+    const index =
+      focusWindow && focusWindow.get_monitor() >= 0
+        ? focusWindow.get_monitor()
+        : global.display.get_current_monitor();
+    return (
+      Main.layoutManager.monitors[index] ?? Main.layoutManager.primaryMonitor
+    );
+  }
+
   _showLauncher() {
-    this._view.show(Main.layoutManager.primaryMonitor);
+    this._view.show(this._focusedMonitor());
     this._selectedIndex = 0;
     this._items = [];
   }
