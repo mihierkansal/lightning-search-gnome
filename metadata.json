@@ -1,6 +1,6 @@
 {
   "name": "Lightning Search",
-  "description": "A fast, minimal search launcher for GNOME. Search applications and files, evaluate calculations, and open URLs or web searches from a single search box.",
+  "description": "A fast, minimal search launcher for GNOME, inspired by Spotlight. Search applications and files, evaluate calculations, and open URLs or web searches from a single search box.",
   "uuid": "lightning-search@mihierkansal.github.io",
   "gettext-domain": "lightning-search",
   "shell-version": [

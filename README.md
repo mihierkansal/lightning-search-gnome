@@ -2,7 +2,7 @@
 
 ## About
 
-Lightning Search is a fast, minimal search launcher for GNOME. From a single
+Lightning Search is a fast, minimal search launcher for GNOME, inspired by macOS Spotlight. From a single
 search box it searches applications and files, evaluates calculations, and opens
 URLs or web searches.
 
