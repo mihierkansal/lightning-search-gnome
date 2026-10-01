@@ -81,7 +81,7 @@ Open the extension's preferences to customize it:
 <img src="screenshots/file-search.png" alt="Files search" width="600" style="border-radius:6px;display:block;margin:6px;"> 
 <img src="screenshots/calculator.png" alt="Calculator" width="600" style="border-radius:6px;display:block;margin:6px;">
 
-Note: For you, it may not look exactly like this for you - it depends on your GNOME Shell theme and other extensions. For example here I have Blur My Shell and a Mac-like GTK theme. If you don't have that, it will just look like a normal GNOME Shell element.
+Note: For you, it may not look exactly like this - it depends on your GNOME Shell theme and other extensions. For example here I have Blur My Shell and a Mac-like GTK theme. If you don't have that, it will just look like a normal GNOME Shell element.
 
 ## The reason it exists, despite alternatives
 
