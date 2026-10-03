@@ -124,6 +124,44 @@ export default class Preferences extends ExtensionPreferences {
     });
     launcherGroup.add(commandRunnerRow);
 
+    const resultsGroup = new Adw.PreferencesGroup({
+      title: _("Results"),
+      description: _("How many results the launcher shows at a time."),
+    });
+    const appResultsRow = new Adw.SpinRow({
+      title: _("Maximum application results"),
+      subtitle: _("Application matches shown before the list scrolls"),
+      adjustment: new Gtk.Adjustment({
+        lower: 1,
+        upper: 40,
+        step_increment: 1,
+        page_increment: 4,
+      }),
+    });
+    appResultsRow.value = settings.get_int("app-result-limit");
+    appResultsRow.connect("notify::value", () => {
+      settings.set_int("app-result-limit", Math.round(appResultsRow.value));
+    });
+    resultsGroup.add(appResultsRow);
+
+    const fileResultsRow = new Adw.SpinRow({
+      title: _("Maximum file results"),
+      subtitle: _(
+        "File matches shown before the list scrolls; higher values can make file searches take slightly longer",
+      ),
+      adjustment: new Gtk.Adjustment({
+        lower: 1,
+        upper: 40,
+        step_increment: 1,
+        page_increment: 4,
+      }),
+    });
+    fileResultsRow.value = settings.get_int("file-result-limit");
+    fileResultsRow.connect("notify::value", () => {
+      settings.set_int("file-result-limit", Math.round(fileResultsRow.value));
+    });
+    resultsGroup.add(fileResultsRow);
+
     const matchingGroup = new Adw.PreferencesGroup({
       title: _("Matching"),
       description: _("How loosely a typed query matches application names."),
@@ -219,6 +257,7 @@ export default class Preferences extends ExtensionPreferences {
     page.add(shortcutsGroup);
     page.add(panelGroup);
     page.add(launcherGroup);
+    page.add(resultsGroup);
     page.add(matchingGroup);
     page.add(appearanceGroup);
     page.add(searchGroup);

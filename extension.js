@@ -79,6 +79,8 @@ export default class LightningSearchExtension extends Extension {
       onDismissRequested: () => this._hideLauncher(),
     };
     this._files = new FileSearch();
+    this._appResultLimit = this._settings.get_int("app-result-limit");
+    this._files.resultLimit = this._settings.get_int("file-result-limit");
 
     this._shortcuts = new KeyboardShortcuts();
     this._shortcuts.enable();
@@ -120,6 +122,16 @@ export default class LightningSearchExtension extends Extension {
     this._commandRunnerChangedId = this._settings.connect(
       "changed::enable-command-runner",
       () => this._syncCommandRunner(),
+    );
+
+    this._appResultLimitChangedId = this._settings.connect(
+      "changed::app-result-limit",
+      () => this._syncResultLimits(),
+    );
+
+    this._fileResultLimitChangedId = this._settings.connect(
+      "changed::file-result-limit",
+      () => this._syncResultLimits(),
     );
 
     this._panelButton = null;
@@ -173,6 +185,14 @@ export default class LightningSearchExtension extends Extension {
     if (this._commandRunnerChangedId) {
       this._settings.disconnect(this._commandRunnerChangedId);
       this._commandRunnerChangedId = 0;
+    }
+    if (this._appResultLimitChangedId) {
+      this._settings.disconnect(this._appResultLimitChangedId);
+      this._appResultLimitChangedId = 0;
+    }
+    if (this._fileResultLimitChangedId) {
+      this._settings.disconnect(this._fileResultLimitChangedId);
+      this._fileResultLimitChangedId = 0;
     }
     if (this._panelIconChangedId) {
       this._settings.disconnect(this._panelIconChangedId);
@@ -251,6 +271,13 @@ export default class LightningSearchExtension extends Extension {
   }
 
   _syncCommandRunner() {
+    if (this._view?.isVisible) this._scheduleSearch();
+  }
+
+  _syncResultLimits() {
+    this._appResultLimit = this._settings.get_int("app-result-limit");
+    if (this._files)
+      this._files.resultLimit = this._settings.get_int("file-result-limit");
     if (this._view?.isVisible) this._scheduleSearch();
   }
 
@@ -416,6 +443,7 @@ export default class LightningSearchExtension extends Extension {
       loadApps(Shell.AppSystem.get_default()),
       query,
       _,
+      this._appResultLimit,
     );
     const calculator = [makeCalcItem(query, _)].filter(Boolean);
     const commands = this._settings.get_boolean("enable-command-runner")

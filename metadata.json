@@ -5,6 +5,7 @@
   "gettext-domain": "lightning-search",
   "shell-version": [
     "48",
+    "49",
     "50",
     "51"
   ],

@@ -73,6 +73,8 @@ Open the extension's preferences to customize it:
   whether the search icon is shown and how large its magnifying glass is drawn, and
   whether typing a program name offers to run it in your terminal.
 - **Appearance**: the background color of the highlighted result row.
+- **Results**: how many application results and how many file results the
+  launcher shows at a time.
 - **Search**: the search engine used for the “Search web” fallback result.
 
 ## Screenshots

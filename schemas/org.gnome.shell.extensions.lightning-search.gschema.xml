@@ -88,6 +88,24 @@
         "~/Documents/Clients/John-Doe/IRS-Form-8879.pdf" WILL come up.</description>
     </key>
 
+    <!-- Maximum number of application results shown at once -->
+    <key type="i" name="app-result-limit">
+      <default>8</default>
+      <range min="1" max="40" />
+      <summary>Maximum application results</summary>
+      <description>Number of application matches the launcher can show at once. The list scrolls
+        when the results do not fit on screen.</description>
+    </key>
+
+    <!-- Maximum number of file results shown at once -->
+    <key type="i" name="file-result-limit">
+      <default>6</default>
+      <range min="1" max="40" />
+      <summary>Maximum file results</summary>
+      <description>Number of file matches the launcher can show at once. Higher values make file
+        searches collect more candidates, so they can take slightly longer.</description>
+    </key>
+
     <!-- Run a typed command line in the user's terminal -->
     <key type="b" name="enable-command-runner">
       <default>true</default>
