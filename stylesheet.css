@@ -14,7 +14,6 @@
 
 .lightning-search-box {
   padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .lightning-entry-row {
@@ -30,6 +29,10 @@
   height: 32px;
 }
 
+.lightning-entry-icon {
+  -st-icon-style: symbolic;
+}
+
 .lightning-entry {
   padding: 0 !important;
   margin: 0;
@@ -43,33 +46,40 @@
   background-color: transparent;
 }
 
+.lightning-results-area {
+  border-top: 0.5px solid rgba(200, 200, 200, 0.2);
+}
+
 .lightning-results-scroll {
-  border-top: 0.5px solid rgba(255, 255, 255, 0.1);
-}
-
-/* The shell theme always paints the scrollbar and makes it a 2px line inset
- * 3px from the edge, by insetting the handle with a 3px transparent border
- * (St clips a handle's background to its padding box). Overriding the width,
- * border and radius gives a single thin bar flush with the scroll view's
- * right edge; LauncherView fades it in on hover, since St cannot. */
-StScrollView.lightning-results-scroll StScrollBar {
-  min-width: 6px;
-  min-height: 6px;
-}
-
-StScrollView.lightning-results-scroll StScrollBar StBin#trough {
-  background-color: transparent;
-}
-
-StScrollView.lightning-results-scroll StScrollBar .vhandle,
-StScrollView.lightning-results-scroll StScrollBar .hhandle {
   border: none;
-  border-radius: 3px;
+  -st-vfade-offset: 0;
+}
+
+.lightning-results-wrapper {
+  border: none;
+}
+
+.lightning-scroll-track {
+  width: 12px;
+}
+
+.lightning-scroll-thumb {
+  background-color: rgba(200, 200, 200, 0.35);
+  border-radius: 4px;
+  transition-duration: 120ms;
+}
+
+.lightning-scroll-track.hovered .lightning-scroll-thumb {
+  background-color: rgba(200, 200, 200, 0.65);
 }
 
 .lightning-results {
   padding: 6px;
   spacing: 2px;
+}
+
+.lightning-results-scrollable {
+  padding-right: 12px;
 }
 
 .lightning-result-row {

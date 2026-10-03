@@ -32,7 +32,7 @@ What you can search:
 
 **Files**: Type part or all of a file name/path. Same fuzziness rule.
 
-**Calculator**: Type a math expression, like 4 + 3 \* 8 (it follows order of operations)
+**Calculator**: Type a math expression, like 4 + 3 \* 8 (it follows order of operations). Tip: To find a square root, type `^ 0.5`, because `sqrt()` won't work.
 
 **URL**: Type a URL/website, like https://example.com, example.com, localhost:3000, 192.168.1.1; Only some domains are recognized if you don't type https://, since the .something kind of naming is used for both files and websites - like .zip, .com, etc.
 
