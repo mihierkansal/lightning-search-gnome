@@ -21,12 +21,12 @@
   margin-left: 11px;
   margin-right: 11px;
   margin-bottom: 10px;
-  spacing: 10px;
 }
 
 .lightning-entry-icon-box {
   width: 32px;
   height: 32px;
+  margin-right: 9px;
 }
 
 .lightning-entry-icon {
@@ -91,7 +91,7 @@
 }
 
 .lightning-result-icon {
-  margin-right: 10px;
+  margin-right: 9px;
   width: 32px;
   height: 32px;
 }
