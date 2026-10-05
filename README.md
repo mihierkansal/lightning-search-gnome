@@ -30,7 +30,7 @@ What you can search:
 
 **Apps**: Type part or all of the name of an app - depending on how fuzzy the matching setting is, you can omit some characters in between; for example, on "loose", typing "vsc" will bring up "Visual Studio Code."
 
-**Files**: Type part or all of a file name/path. Same fuzziness rule.
+**Files**: Type part or all of a file name/path. Same fuzziness rule. Content search works too, but it's a little slower.
 
 **Calculator**: Type a math expression, like 4 + 3 \* 8 (it follows order of operations). Implicit multiplication works too: `2pi`, `2(3+4)`, and `(2)(3)` multiply automatically. Standard trigonometry functions, roots, and constants work too: Supported functions: `sqrt`, `cbrt`, `abs`, `exp`, `ln`, `log`, `log10`, `log2`, `round`, `rint`, `floor`, `ceil`, `fact`, `rad`, `deg`, `sin`, `cos`, `tan`, `asin`, `acos`, `atan`, `sinh`, `cosh`, `tanh`, `asinh`, `acosh`, `atanh`, `pow`, `fmod`, `hypot`, `min`, `max` (append `d` to a trigonometry function to use degrees instead of radians, e.g. `sind(30)`). Constants: `pi`, `e`.
 
