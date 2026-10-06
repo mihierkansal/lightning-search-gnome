@@ -27,12 +27,13 @@ To pack it for upload to [extensions.gnome.org](https://extensions.gnome.org/upl
 Type to search. Use the arrow keys (or Tab) to move between results and press
 Enter to open the selected one. Ctrl + Enter runs the alternate action (for file results, it opens
 the containing folder, and for terminal results it runs the command in a terminal window as opposed to the background).
+On a file or folder, Alt + Enter shows its properties and Ctrl + C puts it on the clipboard, so you can paste it in Files or another app.
 Escape closes the launcher.
 What you can search:
 
 **Apps**: Type part or all of the name of an app - depending on how fuzzy the matching setting is, you can omit some characters in between; for example, on "loose", typing "vsc" will bring up "Visual Studio Code."
 
-**Files**: Type part or all of a file name/path. Same fuzziness rule. Content search works too, but it's a little slower. Press Ctrl + Enter to open the containing folder with the file selected instead of opening the file itself.
+**Files**: Type part or all of a file name/path. Same fuzziness rule. Content search works too, but it's a little slower. Press Ctrl + Enter to open the containing folder with the file selected instead of opening the file itself, Alt + Enter to show the properties dialog, or Ctrl + C to copy the file.
 
 **Calculator**: Type a math expression, like 4 + 3 \* 8 (it follows order of operations). Implicit multiplication works too: `2pi`, `2(3+4)`, and `(2)(3)` multiply automatically. Standard trigonometry functions, roots, and constants work too: Supported functions: `sqrt`, `cbrt`, `abs`, `exp`, `ln`, `log`, `log10`, `log2`, `round`, `rint`, `floor`, `ceil`, `fact`, `rad`, `deg`, `sin`, `cos`, `tan`, `asin`, `acos`, `atan`, `sinh`, `cosh`, `tanh`, `asinh`, `acosh`, `atanh`, `pow`, `fmod`, `hypot`, `min`, `max` (append `d` to a trigonometry function to use degrees instead of radians, e.g. `sind(30)`). Constants: `pi`, `e`.
 
