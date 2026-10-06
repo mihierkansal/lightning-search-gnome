@@ -115,7 +115,7 @@ export default class Preferences extends ExtensionPreferences {
     const commandRunnerRow = new Adw.SwitchRow({
       title: _("Run terminal commands"),
       subtitle: _(
-        "When the first word matches an executable on your PATH, run the line in the background (Shift + Enter for a terminal window)",
+        "When the first word matches an executable on your PATH, run the line in the background (Ctrl + Enter for a terminal window)",
       ),
     });
     commandRunnerRow.active = settings.get_boolean("enable-command-runner");

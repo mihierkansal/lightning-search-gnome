@@ -112,7 +112,7 @@
       <summary>Run terminal commands</summary>
       <description>When the first word of the query is an executable on your PATH, offer to run
         the whole line when the result is activated. Pressing Enter runs it in the background
-        without a terminal. Shift + Enter runs it in a terminal window. </description>
+        without a terminal. Ctrl + Enter runs it in a terminal window. </description>
     </key>
 
   </schema>
