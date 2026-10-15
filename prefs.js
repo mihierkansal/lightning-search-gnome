@@ -226,6 +226,18 @@ export default class Preferences extends ExtensionPreferences {
       description: _("Engine used for the “Search web” fallback result."),
     });
 
+    const contentSearchRow = new Adw.SwitchRow({
+      title: _("Search file contents"),
+      subtitle: _(
+        "Also match text inside indexed files, not just their names. Slower, so it only runs once you stop typing",
+      ),
+    });
+    contentSearchRow.active = settings.get_boolean("enable-content-search");
+    contentSearchRow.connect("notify::active", () => {
+      settings.set_boolean("enable-content-search", contentSearchRow.active);
+    });
+    searchGroup.add(contentSearchRow);
+
     const engineRow = new Adw.EntryRow({
       title: _("Search engine URL"),
       show_apply_button: true,

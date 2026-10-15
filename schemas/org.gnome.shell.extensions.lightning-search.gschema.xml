@@ -106,6 +106,16 @@
         searches collect more candidates, so they can take slightly longer.</description>
     </key>
 
+    <!-- Also look for the query inside the text of indexed files -->
+    <key type="b" name="enable-content-search">
+      <default>false</default>
+      <summary>Search file contents</summary>
+      <description>Match text inside indexed files (documents, notes, source files) as well as
+        their names. Content matching is much slower than name matching and needs the local
+        search index, so it only runs once you stop typing. Leave it off for the fastest
+        typing.</description>
+    </key>
+
     <!-- Run a typed command line in the user's terminal -->
     <key type="b" name="enable-command-runner">
       <default>true</default>

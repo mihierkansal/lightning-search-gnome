@@ -1,6 +1,6 @@
 {
   "name": "Lightning Search Launcher",
-  "description": "A fast, minimal search launcher for GNOME, inspired by Spotlight. Search applications and files, evaluate calculations, open URLs or web searches, and run terminal commands from a single search box.\n\nClipboard: activating a calculation result copies it to the clipboard, and Ctrl + C on a file or folder result copies it to the clipboard. The extension never reads or shares clipboard data.\n\nCommands: when the first word of a query is an executable on your PATH, a result is offered to run it in the terminal.",
+  "description": "A fast, minimal search launcher for GNOME, inspired by Spotlight. Search applications and files, evaluate calculations, open URLs or web searches, and run terminal commands from a single search box.\n\nClipboard: activating a calculation result copies it to the clipboard, and Ctrl + C on a file or folder result copies it to the clipboard. The extension never reads or shares clipboard data.\n\nCommands: when the first word of a query is an executable on your PATH, a result is offered to run it in the terminal.\n\nRanking: among similar matches, the results you open most often are listed first. This is counted in a local file and never leaves your machine.",
   "uuid": "lightning-search@mihierkansal.github.io",
   "gettext-domain": "lightning-search",
   "shell-version": [

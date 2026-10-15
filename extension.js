@@ -11,6 +11,7 @@ import * as Main from "resource:///org/gnome/shell/ui/main.js";
 
 import { clearCommandCache } from "./lib/commands.js";
 import { ControlInterface } from "./lib/dbus-control.js";
+import { flushUsage, warmupUsage } from "./lib/frecency.js";
 import { FALLBACK_SHORTCUT, preferredShortcut } from "./lib/keybindings.js";
 import { KeyboardShortcuts } from "./lib/keyboard-shortcuts.js";
 import { LauncherView } from "./lib/launcher-view.js";
@@ -35,6 +36,7 @@ export default class LightningSearchExtension extends Extension {
     this._gettext = this.gettext.bind(this);
     this._settings = this.getSettings(SCHEMA_ID);
     clearCommandCache();
+    warmupUsage();
     setFuzzyLevel(this._settings.get_string("fuzzy-level"));
 
     this._view = new LauncherView(
@@ -85,6 +87,7 @@ export default class LightningSearchExtension extends Extension {
   }
 
   disable() {
+    flushUsage();
     this._search?.dispose();
     this._search = null;
     this._control?.disable();
@@ -111,6 +114,7 @@ export default class LightningSearchExtension extends Extension {
     bindings.add("entry-icon-size", () => this._syncEntryIcon());
     bindings.add("fuzzy-level", () => this._syncFuzzyLevel());
     bindings.add("enable-command-runner", () => this._search.refresh());
+    bindings.add("enable-content-search", () => this._syncContentSearch());
     bindings.add("app-result-limit", () => this._syncResultLimits());
     bindings.add("file-result-limit", () => this._syncResultLimits());
     bindings.add("show-panel-icon", () => this._syncPanelButton());
@@ -167,6 +171,13 @@ export default class LightningSearchExtension extends Extension {
 
   _syncFuzzyLevel() {
     setFuzzyLevel(this._settings.get_string("fuzzy-level"));
+    this._search?.refresh();
+  }
+
+  _syncContentSearch() {
+    this._search?.setContentSearchEnabled(
+      this._settings.get_boolean("enable-content-search"),
+    );
     this._search?.refresh();
   }
 

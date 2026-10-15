@@ -33,7 +33,7 @@ What you can search:
 
 **Apps**: Type part or all of the name of an app - depending on how fuzzy the matching setting is, you can omit some characters in between; for example, on "loose", typing "vsc" will bring up "Visual Studio Code."
 
-**Files**: Type part or all of a file name/path. Same fuzziness rule. Content search works too, but it's a little slower. Press Ctrl + Enter to open the containing folder with the file selected instead of opening the file itself, Alt + Enter to show the properties dialog, or Ctrl + C to copy the file.
+**Files**: Type part or all of a file name/path. Same fuzziness rule. You can also browse a directory by typing a path (`~/Documents/`, `/etc/`). Searching inside file contents is off by default because it is much slower; turn on "Search file contents" in the preferences to also match text inside files. Press Ctrl + Enter to open the containing folder with the file selected instead of opening the file itself, Alt + Enter to show the properties dialog, or Ctrl + C to copy the file.
 
 **Calculator**: Type a math expression, like 4 + 3 \* 8 (it follows order of operations). Implicit multiplication works too: `2pi`, `2(3+4)`, and `(2)(3)` multiply automatically. Standard trigonometry functions, roots, and constants work too: Supported functions: `sqrt`, `cbrt`, `abs`, `exp`, `ln`, `log`, `log10`, `log2`, `round`, `rint`, `floor`, `ceil`, `fact`, `rad`, `deg`, `sin`, `cos`, `tan`, `asin`, `acos`, `atan`, `sinh`, `cosh`, `tanh`, `asinh`, `acosh`, `atanh`, `pow`, `fmod`, `hypot`, `min`, `max` (append `d` to a trigonometry function to use degrees instead of radians, e.g. `sind(30)`). Constants: `pi`, `e`.
 
@@ -44,6 +44,10 @@ What you can search:
 **Web**: Shown when not very many other things (apps, files, calculator, etc) match what you typed. Defaults to Google, but you can change it.
 
 **Commands**: When the first word you type is a program installed on your PATH (for example `htop`, `git status`, `ls -la`), a "Run in background" result appears and runs the line in the background; press Ctrl + Enter to run it in your default terminal window instead.
+
+## Ranking
+
+Results are ordered by how well they match what you typed. Among matches that are about equally good, the ones you open most often come first, so the app you use daily wins over a similarly named one; older uses count for less as time passes. This is counted in `~/.local/state/lightning-search/usage.json` (or `$XDG_STATE_HOME`). It is a local file, and nothing about your usage leaves this machine.
 
 ## Controlling from the terminal
 
@@ -80,7 +84,8 @@ Open the extension's preferences to customize it:
 - **Appearance**: the background color of the highlighted result row.
 - **Results**: how many application results and how many file results the
   launcher shows at a time.
-- **Search**: the search engine used for the “Search web” fallback result.
+- **Search**: the search engine used for the “Search web” fallback result, and
+  whether to also search inside file contents (slower, off by default).
 
 ## Screenshots
 
