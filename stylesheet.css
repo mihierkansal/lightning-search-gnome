@@ -38,12 +38,13 @@
   margin: 0;
   border: 0 !important;
   font-size: 1.25em;
-  background-color: transparent;
+  background: transparent !important;
 }
 
 .lightning-entry:focus {
   border: 0 !important;
-  background-color: transparent;
+  box-shadow: none !important;
+  background: transparent !important;
 }
 
 .lightning-results-area {
