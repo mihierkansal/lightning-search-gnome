@@ -30,7 +30,7 @@ the containing folder, and for terminal results it runs the command in a termina
 On a file or folder, Alt + Enter shows its properties and Ctrl + C puts it on the clipboard, so you can paste it in Files or another app.
 Escape closes the launcher.
 
-**Important: If using Blur my Shell with Popups Blur, turn on "Preserve shell theme" in Blur my Shell settings.**
+**Important: If using Blur my Shell with Popups Blur, turn on "Preserve shell theme" in Blur my Shell settings (unless "override background" is off).**
 
 What you can search:
 
