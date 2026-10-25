@@ -29,7 +29,9 @@ Enter to open the selected one. Ctrl + Enter runs the alternate action (for file
 the containing folder, and for terminal results it runs the command in a terminal window as opposed to the background).
 On a file or folder, Alt + Enter shows its properties and Ctrl + C puts it on the clipboard, so you can paste it in Files or another app.
 Escape closes the launcher.
-Important: If using Blur my Shell with Popups Blur, turn on "Preserve shell theme" (or turn off "override background" and have your shell theme override it to a translucent background).
+
+**Important: If using Blur my Shell with Popups Blur, turn on "Preserve shell theme" in Blur my Shell settings.**
+
 What you can search:
 
 **Apps**: Type part or all of the name of an app - depending on how fuzzy the matching setting is, you can omit some characters in between; for example, on "loose", typing "vsc" will bring up "Visual Studio Code."
