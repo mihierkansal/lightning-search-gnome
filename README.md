@@ -3,7 +3,7 @@
 ## About
 
 Lightning Search Launcher is a fast, minimal search launcher for GNOME, inspired by macOS Spotlight. From a single
-search box it searches applications and files, evaluates calculations, and opens
+search box it searches applications, settings and files, evaluates calculations, and opens
 URLs or web searches.
 
 ## Installation
@@ -35,6 +35,8 @@ Escape closes the launcher.
 What you can search:
 
 **Apps**: Type part or all of the name of an app - depending on how fuzzy the matching setting is, you can omit some characters in between; for example, on "loose", typing "vsc" will bring up "Visual Studio Code."
+
+**Settings**: Type the name of a settings panel, or words describing what you want to change, like "wifi", "night light" or "pointer speed". The best-matching panel opens in Settings.
 
 **Files**: Type part or all of a file name/path. Same fuzziness rule. You can also browse a directory by typing a path (`~/Documents/`, `/etc/`). Searching inside file contents is off by default because it is much slower; turn on "Search file contents" in the preferences to also match text inside files. Press Ctrl + Enter to open the containing folder with the file selected instead of opening the file itself, Alt + Enter to show the properties dialog, or Ctrl + C to copy the file.
 
